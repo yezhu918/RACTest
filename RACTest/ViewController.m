@@ -23,6 +23,18 @@
     self.usernameTextField.backgroundColor = [UIColor redColor];
     [self.view addSubview:self.usernameTextField];
     
+
+    UILabel * lbl = [[UILabel alloc] init];
+    lbl.frame = CGRectMake(30, 150, 200, 400);
+    [self.view addSubview:lbl];lbl.numberOfLines = 0;
+    RAC(lbl,text) = self.usernameTextField.rac_textSignal;
+    RAC(lbl,font) = [self.usernameTextField.rac_textSignal map:^id(NSString *text) {
+        return [UIFont systemFontOfSize:text.length];
+    }];
+    RAC(lbl,backgroundColor) = [self.usernameTextField.rac_textSignal map:^id(NSString *text) {
+        return [UIColor colorWithRed:text.length*20/255.0 green:text.length*20/255.0 blue:text.length*20/255.0 alpha:1];
+    }];
+    
 //    [self.usernameTextField.rac_textSignal subscribeNext:^(id x) {
 //        NSLog(@"%@", x);
 //    }];
