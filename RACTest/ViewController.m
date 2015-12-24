@@ -25,8 +25,9 @@
     
 
     UILabel * lbl = [[UILabel alloc] init];
-    lbl.frame = CGRectMake(30, 150, 200, 400);
+    lbl.frame = CGRectMake(30, 150, 200, 200);
     [self.view addSubview:lbl];lbl.numberOfLines = 0;
+    
     RAC(lbl,text) = self.usernameTextField.rac_textSignal;
     RAC(lbl,font) = [self.usernameTextField.rac_textSignal map:^id(NSString *text) {
         return [UIFont systemFontOfSize:text.length];
@@ -34,6 +35,12 @@
     RAC(lbl,backgroundColor) = [self.usernameTextField.rac_textSignal map:^id(NSString *text) {
         return [UIColor colorWithRed:text.length*20/255.0 green:text.length*20/255.0 blue:text.length*20/255.0 alpha:1];
     }];
+    
+    
+    UILabel * lbl1 = [[UILabel alloc] init];
+    lbl1.frame = CGRectMake(30, 350, 200, 200);
+     RAC(lbl1,text) = self.usernameTextField.rac_textSignal;
+    [self.view addSubview:lbl1];lbl1.numberOfLines = 0;
     
 //    [self.usernameTextField.rac_textSignal subscribeNext:^(id x) {
 //        NSLog(@"%@", x);
